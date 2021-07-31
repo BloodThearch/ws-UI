@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:developer' as dev;
 import 'package:http/http.dart' as http;
+import 'package:ws_ui/services/api.dart';
 
 import 'package:ws_ui/views/login.dart';
 
@@ -40,8 +41,7 @@ class _HomePageState extends State<HomePage> {
       user = prefs.getString('user').toString();
     });
 
-    var res =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/get-users/$user'));
+    var res = await http.get(Uri.parse(APIRoutes.getSingleUser + '$user'));
     var decode = jsonDecode(res.body);
     if (res.statusCode == 200) {
       dev.log('$user');
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                 child: Icon(Icons.location_pin),
                 onPressed: () async {
                   var res = await http.patch(
-                      Uri.parse('http://10.0.2.2:8000/api/updateLocation/'),
+                      Uri.parse(APIRoutes.updateLocation),
                       headers: <String, String>{
                         'Content-Type': 'application/json'
                       },

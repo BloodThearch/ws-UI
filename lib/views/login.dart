@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ws_ui/services/api.dart';
 import 'dart:developer' as developer;
 
 import 'package:ws_ui/views/home.dart';
@@ -54,8 +55,7 @@ class Login extends StatelessWidget {
                 child: Text('Login'),
                 onPressed: () async {
                   // ADD A CONDITIONAL TO PROCESS LOGIN CREDS SERVER SIDE
-                  var res = await http.post(
-                      Uri.parse('http://10.0.2.2:8000/api/login'),
+                  var res = await http.post(Uri.parse(APIRoutes.login),
                       headers: <String, String>{
                         'Content-Type': 'application/json'
                       },

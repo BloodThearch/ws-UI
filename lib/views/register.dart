@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ws_ui/views/login.dart';
+import 'package:ws_ui/services/api.dart';
 
 class Register extends StatelessWidget {
   TextEditingController _username = TextEditingController();
@@ -59,8 +59,7 @@ class Register extends StatelessWidget {
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     child: Text('Submit'),
                     onPressed: () async {
-                      var res = await http.post(
-                          Uri.parse('http://10.0.2.2:8000/api/reg/user/'),
+                      var res = await http.post(Uri.parse(APIRoutes.register),
                           headers: <String, String>{
                             'Content-Type': 'application/json'
                           },
